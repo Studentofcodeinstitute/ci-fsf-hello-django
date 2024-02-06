@@ -1,10 +1,1 @@
-core.Microsoft*
-core.mongo*
-core.python*
-env.py
-__pycache__/
-*.py[cod]
-node_modules/
-.github/
-cloudinary_python.txt
 os.environ.setdefault("DATABASE_URL", "postgres://otdhqxub:uJnXeVGIpI4AJJaPOHsk-dbixGbzvj7N@snuffleupagus.db.elephantsql.com/otdhqxub")
