@@ -10,13 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import secrets
 from pathlib import Path
 import os
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
 
-os.environ.get("postgres://otdhqxub:uJnXeVGIpI4AJJaPOHsk-dbixGbzvj7N@snuffleupagus.db.elephantsql.com/otdhqxub")
+
+
+SECRET_KEY = os.environ.get(
+    "postgres://otdhqxub:uJnXeVGIpI4AJJaPOHsk-dbixGbzvj7N@snuffleupagus.db.elephantsql.com/otdhqxub",
+    default=secrets.token_urlsafe(nbytes=64),
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,11 +31,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-$05567rt^_1ey&q#5or+-^8dj$27g$(7s23wp@@u4%ateg3hw7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if not IS_HEROKU_APP:
+    DEBUG = True
+
+if IS_HEROKU_APP:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = []
 
 ALLOWED_HOSTS = ['8000-studentofco-cifsfhellod-6npmt4dsa3d.ws-eu107.gitpod.io']
 
