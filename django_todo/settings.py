@@ -33,10 +33,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$05567rt^_1ey&q#5or+-^8dj$27g$(7s23wp@@u4%ateg3hw7')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = development
-ALLOWED_HOSTS = ['8000-studentofcodeinstitute-h-2cv91ikz26.us2.codeanyapp.com']
-ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
-ALLOWED_HOSTS = ['rba-django-todo-app-631e96351563.herokuapp.com']
+DEBUG = True
+
+if True:
+    ALLOWED_HOSTS = ['8000-studentofco-cifsfhellod-6npmt4dsa3d.ws-eu108.gitpod.io']
+
+else:
+    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -84,7 +90,7 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-if development:
+if True:
    DATABASES = {
     'default': {
       'ENGINE': 'django.db.backends.sqlite3',
