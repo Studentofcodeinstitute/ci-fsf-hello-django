@@ -19,10 +19,7 @@ if os.path.isfile('env.py'):
 
 development = os.environ.get('DEVELOPMENT', False)
 
-SECRET_KEY = os.environ.get(
-    "postgres://otdhqxub:uJnXeVGIpI4AJJaPOHsk-dbixGbzvj7N@snuffleupagus.db.elephantsql.com/otdhqxub",
-    default=secrets.token_urlsafe(nbytes=64),
-)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +34,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$05567rt^_1ey&q#5or+-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = development
-
+ALLOWED_HOSTS = ['8000-studentofcodeinstitute-h-2cv91ikz26.us2.codeanyapp.com']
 ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 ALLOWED_HOSTS = ['rba-django-todo-app-631e96351563.herokuapp.com']
 # Application definition
@@ -95,8 +92,9 @@ if development:
     }
 }
 else:
+    DATABASE_URL = os.getenv('DATABASE_URL')
     DATABASES = {
-       'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    'default': dj_database_url.config(),
     }
 
 
